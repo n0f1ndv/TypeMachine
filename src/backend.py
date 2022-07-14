@@ -72,8 +72,6 @@ def create_text(punc_mark, text_len):
             text += f'{punc_mark}'
 
             i += 1
-            if i % 10 == 0 and text_len != 10:
-                text += '\n'
 
     return text[:-(len(punc_mark))]
 
@@ -81,6 +79,8 @@ def command(window):
     state = window.getkey()
     new_text, loop = bool(), bool()
 
+    # TODO:
+    # * Make better command mode
     if state == 'r':
         new_text = False
         loop = True
