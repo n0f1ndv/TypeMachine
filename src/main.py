@@ -1,18 +1,19 @@
 import backend
 import curses
-import sys
-
-# TODO:
-# * Login for text which contains more than one line
 
 def main(stdscr):
     new_text = True
     loop = True
     while loop:
+        stdscr.clear()
+        stdscr.addstr(0, 0, 'Press q to quit, anything else to start.')
+        if stdscr.getkey() == 'q':
+            break
+
+        # backed.set_options(stdscr)
+
         if new_text:
             text = backend.create_text(' ', 10)
-            stdscr.addstr(0, 0, text)
-            stdscr.getch()
 
         stdscr.clear()
 

@@ -75,21 +75,19 @@ def create_text(punc_mark, text_len):
 
     return text[:-(len(punc_mark))]
 
+def set_options(window):
+    pass
+
 def command(window):
     state = window.getkey()
-    new_text, loop = bool(), bool()
 
-    # TODO:
-    # * Make better command mode
     if state == 'r':
         new_text = False
-        loop = True
-    elif state == 'n':
-        new_text = True
         loop = True
     elif state == 'q':
         loop = False
     else:
-        loop = False
+        loop = True
+        new_text = True
         
     return loop, new_text, 0, 0, 0
