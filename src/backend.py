@@ -76,7 +76,15 @@ def create_text(punc_mark, text_len):
     return text[:-(len(punc_mark))]
 
 def set_options(window):
-    pass
+    window.addstr(1, 0, "Chose punctuation mark: ")
+    punc_mark = window.getkey()
+    window.addstr(punc_mark)
+
+    window.addstr(2, 0, "How many words to you want to type: ")
+    text_len = int(window.getstr(2))
+    window.addstr(str(text_len))
+
+    return punc_mark, text_len
 
 def command(window):
     state = window.getkey()

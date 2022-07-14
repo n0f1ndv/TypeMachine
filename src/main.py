@@ -10,10 +10,9 @@ def main(stdscr):
         if stdscr.getkey() == 'q':
             break
 
-        # backed.set_options(stdscr)
-
         if new_text:
-            text = backend.create_text(' ', 10)
+            punc_mark, text_len = backend.set_options(stdscr)
+            text = backend.create_text(punc_mark, text_len)
 
         stdscr.clear()
 
