@@ -76,13 +76,25 @@ def create_text(punc_mark, text_len):
     return text[:-(len(punc_mark))]
 
 def set_options(window):
-    window.addstr(1, 0, "Chose punctuation mark: ")
+    window.addstr(1, 0, "Punctuation mark: ")
     punc_mark = window.getkey()
     window.addstr(punc_mark)
 
-    window.addstr(2, 0, "How many words to you want to type: ")
-    text_len = int(window.getstr(2))
-    window.addstr(str(text_len))
+    window.addstr(2, 0, "Amount of words (default=10, press 'y' to accept): ")
+    text_len = 10
+    while True:
+        key = window.getkey()
+
+        if key == 'KEY_LEFT' and text_len > 0:
+            text_len -= 5
+        if key == 'KEY_RIGHT' and text_len < 30:
+            text_len += 5
+
+        # TODO: Move this line into separate window to refresh it properly
+        window.addstr(str(text_len))
+
+        if key == 'y':
+            break
 
     return punc_mark, text_len
 
