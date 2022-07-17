@@ -51,52 +51,28 @@ def get_input(window, text):
 def calculate_results(window, mist, dur, wit, txtlen):
     accuracy = round(((txtlen - mist) / txtlen) * 100, 1)
     acc_info = f"Accuracy: {str(accuracy)}"
-    window.addstr(4, int((curses.COLS - len(acc_info)) / 2), acc_info)
+    window.addstr(6, int((curses.COLS - len(acc_info)) / 2), acc_info)
 
     wpm = round(wit / dur * 60)
     wpm_info = f"WPM: {str(wpm)}"
-    window.addstr(5, int((curses.COLS - len(str(wpm_info))) / 2), wpm_info)
+    window.addstr(7, int((curses.COLS - len(str(wpm_info))) / 2), wpm_info)
 
-def create_text(punc_mark, text_len):
+def create_text():
     text = str()
     common_words = list()
-
-    if punc_mark != ' ':
-        punc_mark += ' '
 
     with open('res/common_words.txt', 'r') as file:
         common_words = file.read()[:-1]
         i = 0
-        while i < text_len:
+        while i < 10:
             text += common_words.split('\n')[randrange(0, 1000)]
-            text += f'{punc_mark}'
+            text += ' '
 
             i += 1
 
-    return text[:-(len(punc_mark))]
+        text = text[:-1]
 
-def set_options(window):
-    window.addstr(1, 0, "Punctuation mark: ")
-    punc_mark = window.getkey()
-    window.addstr(punc_mark)
-
-    window.addstr(2, 0, "Amount of words (default=10, press 'y' to accept): ")
-    text_len = 10
-    while True:
-        key = window.getkey()
-
-        if key == 'KEY_LEFT' and text_len > 0:
-            text_len -= 5
-        if key == 'KEY_RIGHT' and text_len < 30:
-            text_len += 5
-
-        # TODO: Move this line into separate window to refresh it properly
-        window.addstr(str(text_len))
-
-        if key == 'y':
-            break
-
-    return punc_mark, text_len
+    return text
 
 def command(window):
     state = window.getkey()
@@ -105,6 +81,7 @@ def command(window):
         new_text = False
         loop = True
     elif state == 'q':
+        new_text = False
         loop = False
     else:
         loop = True

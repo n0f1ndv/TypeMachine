@@ -6,15 +6,9 @@ def main(stdscr):
     loop = True
     while loop:
         stdscr.clear()
-        stdscr.addstr(0, 0, 'Press q to quit, anything else to start.')
-        if stdscr.getkey() == 'q':
-            break
 
         if new_text:
-            punc_mark, text_len = backend.set_options(stdscr)
-            text = backend.create_text(punc_mark, text_len)
-
-        stdscr.clear()
+            text = backend.create_text()
 
         stdscr.addstr(0, int((curses.COLS - 12) / 2) , "/TypeMachine")
         stdscr.addstr(2, int((curses.COLS - len(text)) / 2), text)
