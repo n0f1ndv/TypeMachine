@@ -77,14 +77,23 @@ def create_text():
 def command(window):
     state = window.getkey()
 
-    if state == 'r':
-        new_text = False
-        loop = True
-    elif state == 'q':
-        new_text = False
-        loop = False
-    else:
-        loop = True
-        new_text = True
+    while True:
+        if state == 'r':
+            new_text = False
+            loop = True
+
+            break
+        elif state == 'q':
+            new_text = False
+            loop = False
+
+            break
+        elif state == 'n':
+            loop = True
+            new_text = True
+
+            break
+        else:
+            continue
         
     return loop, new_text, 0, 0, 0
